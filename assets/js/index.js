@@ -50,4 +50,13 @@ let scheduleElArray = [
     schedule5pm,
 ];
 
+renderLastRegistered();
 updateTime();
+
+// created the local storage function
+function renderLastRegistered() {
+    for (let el of scheduleElArray) {
+        el.val(localStorage.getItem("time block " + el.data("hour")));
+
+    }
+}
