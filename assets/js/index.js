@@ -1,3 +1,29 @@
+// will update the time on the webpage.
+function updateTime() {
+    let today = moment();
+
+    // updates the time element in the header
+    $("#currentDay").text(today.format("dddd, MMMM Do YYYY, h:mm.ss"));
+
+    // For coloring the past, present, and future time blocks
+    let now = moment().format("kk");
+    for (let i = 0; i < scheduleElArray.length; i++) {
+        scheduleElArray[i].removeClass("future past present");
+
+        if (now > scheduleElArray[i].data("hour")) {
+            scheduleElArray[i].addClass("past");
+
+        } else if (now === scheduleElArray[i].attr("data-hour")) {
+            scheduleElArray[i].addClass("present");
+
+        } else {
+
+            scheduleElArray[i].addClass("future");
+        }
+    }
+}
+
+
 // I have stored variables with their respective values since I'll create an array with them.
 let saveBttn = $(".save-icon");
 let containerEl = $(".container");
@@ -10,3 +36,18 @@ let schedule2pm = $("#2PM");
 let schedule3pm = $("#3PM");
 let schedule4pm = $("#4PM");
 let schedule5pm = $("#5PM");
+
+// The variables are put within an array.
+let scheduleElArray = [
+    schedule9am,
+    schedule10am,
+    schedule11am,
+    schedule12pm,
+    schedule1pm,
+    schedule2pm,
+    schedule3pm,
+    schedule4pm,
+    schedule5pm,
+];
+
+updateTime();
