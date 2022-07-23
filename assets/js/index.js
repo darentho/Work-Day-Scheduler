@@ -52,6 +52,7 @@ let scheduleElArray = [
 
 renderLastRegistered();
 updateTime();
+setInterval(updateTime, 1000);
 
 // created the local storage function
 function renderLastRegistered() {
@@ -60,3 +61,18 @@ function renderLastRegistered() {
 
     }
 }
+
+// function for handling clicks
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    let btnClicked = $(event.currentTarget);
+
+    let targetText = btnClicked.siblings("textarea");
+
+    let targetTimeBlock = targetText.data("hour");
+
+    localStorage.setItem("time block " + targetTimeBlock, targetText.val());
+}
+
+saveBttn.on("click", handleFormSubmit);
